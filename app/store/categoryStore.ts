@@ -1,0 +1,21 @@
+import { create } from "zustand";
+import { Categories, Category } from "../(types)/types";
+
+export const useCategoryStore = create<{
+  selectedCategory: Category;
+  setSelectedCategory: (category: Category) => void;
+  categories: Categories;
+  setCategories: (categories: Categories) => void;
+}>((set) => ({
+  selectedCategory: {
+    idCategory: "1",
+    strCategory: "Beef",
+    strCategoryDescription:
+      "Beef is the culinary name for meat from cattle, particularly skeletal muscle. Humans have been eating beef since prehistoric times.[1] Beef is a source of high-quality protein and essential nutrients.[2]",
+    strCategoryThumb: "https://www.themealdb.com/images/category/beef.png",
+  },
+  setSelectedCategory: (category: Category) =>
+    set({ selectedCategory: category }),
+  categories: [],
+  setCategories: (categories: Categories) => set({ categories }),
+}));
