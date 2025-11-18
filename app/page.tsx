@@ -35,7 +35,7 @@ export default function Home() {
           isScrolled
             ? "top-16 h-[calc(100vh-64px)]"
             : "top-20 h-[calc(100vh-80px)]"
-        } left-0 w-24 shrink-0 self-start py-4 transition-all duration-300     /* Scrollbar track */
+        } left-0 w-24 shrink-0 self-start py-4 transition-all duration-300
     ${
       isDarkTheme
         ? "[&::-webkit-scrollbar-track]:bg-gray-800"

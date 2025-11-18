@@ -40,7 +40,7 @@ export default function Header() {
           {/* Logo */}
           <div className="shrink-0">
             <div
-              className={`font-bold transition-all duration-300 ${
+              className={`font-bold transition-all duration-300 w-24 flex items-center justify-center ${
                 isScrolled ? "text-xl" : "text-2xl"
               } ${isDarkTheme ? "text-white" : "text-gray-900"}`}
             >
@@ -54,7 +54,7 @@ export default function Header() {
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 justify-end me-4">
             {/* Search Bar */}
             <SearchBar />
             {/* Theme Toggle Button */}

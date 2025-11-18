@@ -36,7 +36,7 @@ const SearchBar = () => {
   }, [searchText]);
 
   return (
-    <div ref={searchRef} className="relative flex-1 w-[500px]">
+    <div ref={searchRef} className="relative md:w-[500px]">
       <div
         className={`flex items-center gap-2 transition-all duration-300 ease-out cursor-pointer  ${
           isExpanded ? "w-full" : "w-[53px]"
@@ -81,7 +81,7 @@ const SearchBar = () => {
           />
 
           {/* Category Dropdown */}
-          <div className="relative" ref={dropdownRef}>
+          <div className="relative hidden md:block" ref={dropdownRef}>
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors duration-200 ${

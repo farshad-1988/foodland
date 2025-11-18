@@ -56,7 +56,7 @@ export default function ShowItems() {
 
   return (
     <div
-      className={`px-4 sm:p-8 transition-colors duration-300 ${
+      className={`px-4 sm:p-8 transition-colors duration-300 mt-4 md:mt-0 ${
         isDarkTheme
           ? "bg-gray-900"
           : "bg-linear-to-br from-orange-50 via-white to-amber-50"
