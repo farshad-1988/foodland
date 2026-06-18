@@ -27,7 +27,7 @@ export default function Home() {
       }`}
     >
       <div
-        className={`flex flex-col overflow-auto sticky ${
+        className={`flex flex-col overflow-auto sticky items-center justify-center ${
           isDarkTheme
             ? "bg-gray-900"
             : "bg-linear-to-br from-orange-50 via-white to-amber-50"
@@ -35,7 +35,7 @@ export default function Home() {
           isScrolled
             ? "top-16 h-[calc(100vh-64px)]"
             : "top-20 h-[calc(100vh-80px)]"
-        } left-0 w-24 shrink-0 self-start py-4 transition-all duration-300
+        } left-0 w-28 shrink-0 self-start py-4 transition-all duration-300
     ${
       isDarkTheme
         ? "[&::-webkit-scrollbar-track]:bg-gray-800"

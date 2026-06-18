@@ -65,7 +65,7 @@ export default function ShowItems() {
       <div className=" mx-auto">
         {/* Recipe Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {meals
+          {foodsInfo
             ?.filter((food) =>
               food.strMeal.toLowerCase().includes(searchText.toLowerCase())
             )
