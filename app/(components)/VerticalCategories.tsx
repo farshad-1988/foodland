@@ -4,20 +4,12 @@ import { useCategoryStore } from "../store/categoryStore";
 import { Categories } from "../(types)/types";
 import Image from "next/image";
 import { useSearchTextAndThemeStore } from "../store/searchTextAndThemeStore";
+import { fetchCategories } from "../(api)/getFoodData";
 
 const VerticalCategories = () => {
   const { selectedCategory, setSelectedCategory, setCategories } =
     useCategoryStore();
   const { isDarkTheme } = useSearchTextAndThemeStore();
-
-  const fetchCategories = async (): Promise<Categories> => {
-    const res = await fetch(
-      "https://www.themealdb.com/api/json/v1/1/categories.php",
-    );
-    const data = await res.json();
-    setCategories(data.categories);
-    return data.categories;
-  };
 
   const {
     data: categoriesInfo,
@@ -25,7 +17,7 @@ const VerticalCategories = () => {
     isError,
   } = useQuery<Categories>({
     queryKey: ["categories"],
-    queryFn: fetchCategories,
+    queryFn: () => fetchCategories(setCategories),
     enabled: !!selectedCategory,
   });
 
