@@ -4,20 +4,12 @@ import { Meals } from "../(types)/types";
 import { useCategoryStore } from "../store/categoryStore";
 import { useMealStore } from "../store/mealStore";
 import { useSearchTextAndThemeStore } from "../store/searchTextAndThemeStore";
+import { fetchData } from "../(api)/getFoodData";
 
 export default function ShowItems() {
   const { selectedCategory } = useCategoryStore();
   const { searchText, isDarkTheme } = useSearchTextAndThemeStore();
   const { setMeals, meals } = useMealStore();
-
-  const fetchData = async (): Promise<Meals> => {
-    const res = await fetch(
-      `https://www.themealdb.com/api/json/v1/1/filter.php?c=${selectedCategory.strCategory}`
-    );
-    const data = await res.json();
-    setMeals(data.meals);
-    return data.meals;
-  };
 
   const {
     data: foodsInfo,
@@ -26,7 +18,7 @@ export default function ShowItems() {
     error,
   } = useQuery<Meals>({
     queryKey: ["foods", selectedCategory],
-    queryFn: fetchData,
+    queryFn: () => fetchData(setMeals, selectedCategory.strCategory),
     enabled: !!selectedCategory,
   });
 
@@ -65,9 +57,9 @@ export default function ShowItems() {
       <div className=" mx-auto">
         {/* Recipe Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {meals
+          {foodsInfo
             ?.filter((food) =>
-              food.strMeal.toLowerCase().includes(searchText.toLowerCase())
+              food.strMeal.toLowerCase().includes(searchText.toLowerCase()),
             )
             ?.map((meal) => (
               <FoodCard key={meal.idMeal} meal={meal} />
