@@ -1,5 +1,6 @@
+import { useState, useEffect } from "react";
+
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
 import { useCategoryStore } from "../store/categoryStore";
 import { Categories } from "../(types)/types";
 import Image from "next/image";
@@ -9,6 +10,15 @@ import { fetchCategories } from "../(api)/getFoodData";
 const VerticalCategories = () => {
   const { selectedCategory, setSelectedCategory, setCategories } =
     useCategoryStore();
+  const [isScrolled, setIsScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   const { isDarkTheme } = useSearchTextAndThemeStore();
 
   const {
@@ -36,13 +46,35 @@ const VerticalCategories = () => {
       </div>
     );
   }
-
+  console.log(categoriesInfo?.length);
   return (
-    <>
+    <div
+      className={`flex flex-col overflow-auto sticky items-center w-28  ${
+        isDarkTheme
+          ? "bg-gray-900"
+          : "bg-linear-to-br from-orange-50 via-white to-amber-50"
+      } ${
+        isScrolled
+          ? "top-16 h-[calc(100vh-64px)]"
+          : "top-20 h-[calc(100vh-80px)]"
+      } left-0  shrink-0 self-start py-4 transition-all duration-300
+    ${
+      isDarkTheme
+        ? "[&::-webkit-scrollbar-track]:bg-gray-800"
+        : "[&::-webkit-scrollbar-track]:bg-white"
+    }
+
+    /* Scrollbar thumb */
+    ${
+      isDarkTheme
+        ? "[&::-webkit-scrollbar-thumb]:bg-gray-100"
+        : "[&::-webkit-scrollbar-thumb]:bg-gray-800"
+    }`}
+    >
       {categoriesInfo?.map((category) => (
         <div
           key={category.idCategory}
-          className={`shrink-0 rounded-lg flex flex-col items-center cursor-pointer transition-all duration-200 w-24 h-24 justify-center
+          className={`shrink-0  rounded-lg flex flex-col items-center cursor-pointer transition-all duration-200 w-24 h-24 justify-center
     ${
       selectedCategory.strCategory === category.strCategory
         ? isDarkTheme
@@ -70,7 +102,7 @@ const VerticalCategories = () => {
           </p>
         </div>
       ))}
-    </>
+    </div>
   );
 };
 
